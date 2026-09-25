@@ -5,6 +5,7 @@ const t=(id:string,exercise:string,variant:string,sets:number,reps:number,minRep
 const straight=(id:string,e:string,v:string,sets:number,reps:number,min:number,max:number,rir:number,rest:number,strategy:Strategy='REPS_THEN_VOLUME')=>t(id,e,v,sets,reps,min,max,rir,rest,{strategy});
 const emom=(id:string,e:string,v:string,minutes:number,reps:number,rir:number,strategy:Strategy='REPS_THEN_DURATION')=>t(id,e,v,minutes,reps,reps,reps,rir,60,{type:'EMOM',duration:minutes,strategy});
 const bar=(id:string,name:string,rounds:number,rest:number,sequence:string[],strategy:Strategy='ROUNDS_THEN_REST')=>t(id,'Bar Set',name,rounds,1,1,1,2,rest,{type:'BAR_SET',rounds,sequence,strategy});
+const circuit=(id:string,name:string,rounds:number,rest:number,sequence:string[],strategy:Strategy='PERFORMANCE_THEN_DENSITY')=>t(id,'Endurance Circuit',name,rounds,1,1,1,2,rest,{type:'CIRCUIT',rounds,sequence,strategy});
 const density=(id:string,name:string,duration:number,sequence:string[],strategy:Strategy='REPS_THEN_DURATION')=>t(id,'Upper Density',name,1,1,1,1,2,0,{type:'DENSITY',duration,sequence,strategy});
 const test=(id:string,name:string,sequence:string[])=>t(id,'Week 9 Testing',name,1,1,1,1,0,0,{type:'TEST',sequence,strategy:'PERFORMANCE_THEN_DENSITY'});
 
@@ -77,12 +78,10 @@ for(let w=5;w<=8;w++){
     straight(`w${w}-dp`,'Diamond Push-up','Diamond',3,12,10,15,2,90)
   ];
   const upper=[density(`w${w}-dens`,'5 Pull-ups + 10 Push-ups + 8 Dips',15,['5 Pull-ups','10 Push-ups','8 Dips'])];
-  const friday=[
-    straight(`w${w}-fr-pu`,'Pull-up','Strict Pull-up',3,8,8,12,3,90),
-    straight(`w${w}-fr-di`,'Dips','Parallel Bar Dip',3,10,10,16,3,90),
-    straight(`w${w}-fr-ps`,'Push-up','Standard Push-up',3,15,15,25,3,90),
-    straight(`w${w}-fr-au`,'Australian Pull-up','Australian',3,12,12,20,3,90)
-  ];
+  // Friday is a real circuit from Block B onward: one continuous sequence, tracked by rounds and recovery.
+  const fridayRounds=w===5?3:4;
+  const fridayRest=w===5?120:w===6?105:w===7?90:75;
+  const friday=[circuit(`w${w}-fri-circuit`,'8 Pull-up + 12 Dips + 20 Push-up + 15 Australian',fridayRounds,fridayRest,['8 Pull-up','12 Dips','20 Push-up','15 Australian Pull-up'])];
   const saturday=[bar(`w${w}-bar`,'2 MU + 6 PU + 10 Dips + 15 Push-ups',4,120,['2 Muscle-up','6 Pull-up','10 Dips','15 Push-up'])];
   workouts.push(...week(w,blocks.B,40,pull,push,upper,friday,saturday));
 }
@@ -121,40 +120,53 @@ for(let w=10;w<=13;w++){
   ];
   const barRest=w===10?120:w===11?120:w===12?105:90;
   const upper=[bar(`w${w}-bar`,`Bar Set C · 2 MU + 6 PU + 10 Dips + 15 Push-ups`,w===10?4:5,barRest,['2 Muscle-up','6 Pull-up','10 Dips','15 Push-up'])];
-  const friday=[
-    straight(`w${w}-fr-pu`,'Pull-up','Strict Pull-up',3,8,8,12,3,90),
-    straight(`w${w}-fr-di`,'Dips','Parallel Bar Dip',3,10,10,16,3,90),
-    straight(`w${w}-fr-ps`,'Push-up','Standard Push-up',3,15,15,25,3,90),
-    straight(`w${w}-fr-au`,'Australian Pull-up','Australian',3,12,12,20,3,90)
-  ];
+  // Friday becomes the longer endurance circuit; Saturday remains the shorter Bar Set competition format.
+  const fridayRounds=w===10?4:w===11?4:5;
+  const fridayRest=w===10?120:w===11?105:w===12?90:75;
+  const friday=[circuit(`w${w}-fri-circuit`,'10 Pull-up + 15 Dips + 20 Push-up + 15 Australian',fridayRounds,fridayRest,['10 Pull-up','15 Dips','20 Push-up','15 Australian Pull-up'])];
   const circuit=bar(`w${w}-circuit`,'Circuit 01 · 10 PU + 15 Dips + 20 Push-ups + 15 Australian',4,120,['10 Pull-up','15 Dips','20 Push-up','15 Australian Pull-up'],'PERFORMANCE_THEN_DENSITY');
   workouts.push(...week(w,blocks.C,45,pull,push,upper,friday,[circuit]));
 }
 
 // BLOCK P — WEEKS 14–16
 for(let w=14;w<=16;w++){
-  const pull=[
-    straight(`w${w}-pu`,'Pull-up','Strict Pull-up',4,10,8,12,1,150),
-    straight(`w${w}-ch`,'Chin-up','Strict Chin-up',3,10,8,12,1,120),
-    straight(`w${w}-au`,'Australian Pull-up','Australian',3,18,15,20,1,90),
-    emom(`w${w}-pem`,'Pull-up EMOM','Strict Pull-up',12,7,1,'PERFORMANCE_THEN_DENSITY')
-  ];
-  const push=[
-    straight(`w${w}-di`,'Dips','Parallel Bar Dip',4,14,10,16,1,150),
-    straight(`w${w}-ps`,'Push-up','Standard Push-up',4,20,15,25,1,120),
-    straight(`w${w}-dp`,'Diamond Push-up','Diamond',3,14,10,15,1,90),
-    emom(`w${w}-psem`,'Push-up EMOM','Standard Push-up',10,12,1,'PERFORMANCE_THEN_DENSITY')
-  ];
-  const densityBlock=density(`w${w}-density`,'20-min Density · Pull-up → Dips → Push-up',20,['Pull-up','Dips','Push-up'],'PERFORMANCE_THEN_DENSITY');
-  const friday=[
-    straight(`w${w}-fr-pu`,'Pull-up','Strict Pull-up',3,8,8,12,3,90),
-    straight(`w${w}-fr-di`,'Dips','Parallel Bar Dip',3,10,10,16,3,90),
-    straight(`w${w}-fr-ps`,'Push-up','Standard Push-up',3,15,15,25,3,90),
-    straight(`w${w}-fr-au`,'Australian Pull-up','Australian',3,12,12,20,3,90)
-  ];
-  const finalRest=w===14?120:w===15?105:90;
-  const finalBar=bar(`w${w}-final`,'Final Bar Set · 2 MU + 6 PU + 10 Dips + 15 Push-ups',5,finalRest,['2 Muscle-up','6 Pull-up','10 Dips','15 Push-up'],'PERFORMANCE_THEN_DENSITY');
-  workouts.push(...week(w,blocks.P,50,pull,push,[densityBlock],friday,[finalBar]));
+  if(w<16){
+    const pull=[
+      straight(`w${w}-pu`,'Pull-up','Strict Pull-up',4,10,8,12,1,150),
+      straight(`w${w}-ch`,'Chin-up','Strict Chin-up',3,10,8,12,1,120),
+      straight(`w${w}-au`,'Australian Pull-up','Australian',3,18,15,20,1,90),
+      emom(`w${w}-pem`,'Pull-up EMOM','Strict Pull-up',12,7,1,'PERFORMANCE_THEN_DENSITY')
+    ];
+    const push=[
+      straight(`w${w}-di`,'Dips','Parallel Bar Dip',4,14,10,16,1,150),
+      straight(`w${w}-ps`,'Push-up','Standard Push-up',4,20,15,25,1,120),
+      straight(`w${w}-dp`,'Diamond Push-up','Diamond',3,14,10,15,1,90),
+      emom(`w${w}-psem`,'Push-up EMOM','Standard Push-up',10,12,1,'PERFORMANCE_THEN_DENSITY')
+    ];
+    const densityBlock=density(`w${w}-density`,'20-min Density · Pull-up → Dips → Push-up',20,['Pull-up','Dips','Push-up'],'PERFORMANCE_THEN_DENSITY');
+    const fridayRounds=w===14?4:3;
+    const fridayRest=w===14?90:105;
+    const friday=[circuit(`w${w}-fri-circuit`,'8 Pull-up + 12 Dips + 20 Push-up + 15 Australian',fridayRounds,fridayRest,['8 Pull-up','12 Dips','20 Push-up','15 Australian Pull-up'])];
+    const finalRest=w===14?120:105;
+    const finalBar=bar(`w${w}-final`,'Final Bar Set · 2 MU + 6 PU + 10 Dips + 15 Push-ups',5,finalRest,['2 Muscle-up','6 Pull-up','10 Dips','15 Push-up'],'PERFORMANCE_THEN_DENSITY');
+    workouts.push(...week(w,blocks.P,50,pull,push,[densityBlock],friday,[finalBar]));
+  }else{
+    // W16 is a taper: reduce fatigue, keep movement quality, and finish with a controlled rehearsal.
+    const pull=[
+      straight('w16-pu','Pull-up','Strict Pull-up',2,8,8,12,3,180),
+      straight('w16-ch','Chin-up','Strict Chin-up',2,8,8,12,3,150),
+      straight('w16-au','Australian Pull-up','Australian',2,12,12,20,3,120)
+    ];
+    const push=[
+      straight('w16-di','Dips','Parallel Bar Dip',2,10,10,16,3,180),
+      straight('w16-ps','Push-up','Standard Push-up',2,15,15,25,3,150),
+      straight('w16-dp','Diamond Push-up','Diamond',2,10,10,15,3,120)
+    ];
+    const recovery=[t('w16-recovery','Recovery','Complete rest / mobility',1,1,1,1,0,0,{type:'RECOVERY'})];
+    const primer=[circuit('w16-primer','6 Pull-up + 8 Dips + 12 Push-up + 10 Australian',2,150,['6 Pull-up','8 Dips','12 Push-up','10 Australian Pull-up'],'PERFORMANCE_THEN_DENSITY')];
+    const rehearsal=[bar('w16-rehearsal','Competition Rehearsal · 2 MU + 6 PU + 10 Dips + 15 Push-ups',2,180,['2 Muscle-up','6 Pull-up','10 Dips','15 Push-up'],'PERFORMANCE_THEN_DENSITY')];
+    workouts.push(...week(16,blocks.P,35,pull,push,recovery,primer,[rehearsal]));
+  }
 }
 
 export const TOTAL_WEEKS=16;
