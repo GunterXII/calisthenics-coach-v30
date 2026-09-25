@@ -1,4 +1,5 @@
 import type {Workout,ExerciseTarget,Strategy,BlockType} from '../core/types';
+import {getCurrentWeek as getCycleWeek} from '../core/cycle';
 
 const t=(id:string,exercise:string,variant:string,sets:number,reps:number,minReps:number,maxReps:number,rir:number,rest:number,extra:Partial<ExerciseTarget>={}) : ExerciseTarget => ({id,exercise,variant,sets,reps,minReps,maxReps,rir,rest,strategy:'REPS_THEN_VOLUME',source:'PROGRAM',progressionKey:id.replace(/^w\d+-/,''),...extra});
 const straight=(id:string,e:string,v:string,sets:number,reps:number,min:number,max:number,rir:number,rest:number,strategy:Strategy='REPS_THEN_VOLUME')=>t(id,e,v,sets,reps,min,max,rir,rest,{strategy});
