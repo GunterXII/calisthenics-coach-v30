@@ -124,8 +124,8 @@ for(let w=10;w<=13;w++){
   const fridayRounds=w===10?4:w===11?4:5;
   const fridayRest=w===10?120:w===11?105:w===12?90:75;
   const friday=[circuit(`w${w}-fri-circuit`,'10 Pull-up + 15 Dips + 20 Push-up + 15 Australian',fridayRounds,fridayRest,['10 Pull-up','15 Dips','20 Push-up','15 Australian Pull-up'])];
-  const circuit=bar(`w${w}-circuit`,'Circuit 01 · 10 PU + 15 Dips + 20 Push-ups + 15 Australian',4,120,['10 Pull-up','15 Dips','20 Push-up','15 Australian Pull-up'],'PERFORMANCE_THEN_DENSITY');
-  workouts.push(...week(w,blocks.C,45,pull,push,upper,friday,[circuit]));
+  const saturdayCircuit=circuit(`w${w}-circuit`,'Circuit 01 · 10 PU + 15 Dips + 20 Push-ups + 15 Australian',4,120,['10 Pull-up','15 Dips','20 Push-up','15 Australian Pull-up'],'PERFORMANCE_THEN_DENSITY');
+  workouts.push(...week(w,blocks.C,45,pull,push,upper,friday,[saturdayCircuit]));
 }
 
 // BLOCK P — WEEKS 14–16
@@ -165,7 +165,7 @@ for(let w=14;w<=16;w++){
     const recovery=[t('w16-recovery','Recovery','Complete rest / mobility',1,1,1,1,0,0,{type:'RECOVERY'})];
     const primer=[circuit('w16-primer','6 Pull-up + 8 Dips + 12 Push-up + 10 Australian',2,150,['6 Pull-up','8 Dips','12 Push-up','10 Australian Pull-up'],'PERFORMANCE_THEN_DENSITY')];
     const rehearsal=[bar('w16-rehearsal','Competition Rehearsal · 2 MU + 6 PU + 10 Dips + 15 Push-ups',2,180,['2 Muscle-up','6 Pull-up','10 Dips','15 Push-up'],'PERFORMANCE_THEN_DENSITY')];
-    workouts.push(...week(16,blocks.P,35,pull,push,recovery,primer,[rehearsal]));
+    workouts.push(...week(16,blocks.P,35,pull,push,recovery,primer,rehearsal));
   }
 }
 
