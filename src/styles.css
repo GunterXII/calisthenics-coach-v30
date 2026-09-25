@@ -100,3 +100,41 @@ body:has(.workoutTop){background:radial-gradient(ellipse 100% 45% at 50% -8%,#1a
  .snapshotGrid b{font-size:1.1rem}
  .nextTargetMain{align-items:center}
 }
+
+
+/* Premium Progress dashboard */
+.progressHeroMain{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(190px,.6fr);gap:28px;align-items:end;margin-top:18px}
+.progressHeroNote{display:grid;gap:5px;padding:16px;border:1px solid var(--border,rgba(255,255,255,.08));border-radius:15px;background:rgba(255,255,255,.025)}
+.progressHeroNote span,.progressHeroNote small{font-size:.7rem;opacity:.55}
+.progressHeroNote b{font-size:1.35rem}
+.progressGrid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);gap:14px;margin-top:14px}
+.progressBars{height:190px;display:flex;align-items:end;gap:10px;margin:22px 0 12px}
+.progressBarCol{height:100%;flex:1;display:flex;flex-direction:column;justify-content:end;align-items:center;gap:7px;min-width:0}
+.progressBarCol>b{font-size:.7rem;opacity:.7}
+.progressBarTrack{height:130px;width:100%;max-width:42px;display:flex;align-items:end;background:rgba(255,255,255,.035);border-radius:8px 8px 3px 3px;overflow:hidden}
+.progressBarTrack i{display:block;width:100%;background:var(--accent,#006EC7);border-radius:8px 8px 2px 2px}
+.progressBarCol span{font-size:.65rem;opacity:.5}
+.signal{display:grid;gap:6px;padding:15px;border:1px solid var(--border,rgba(255,255,255,.08));border-radius:13px;background:rgba(255,255,255,.02)}
+.signal b{font-size:1rem}
+.signal span{font-size:.76rem;line-height:1.45;opacity:.58}
+.miniMetrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.miniMetrics>div{padding:11px;border:1px solid var(--border,rgba(255,255,255,.07));border-radius:11px}
+.miniMetrics b,.miniMetrics span{display:block}
+.miniMetrics span{font-size:.68rem;opacity:.5;margin-top:4px}
+.progressExerciseList{margin-top:8px}
+.progressRow{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:15px 0;border-top:1px solid var(--border,rgba(255,255,255,.07))}
+.progressRow:first-child{border-top:0}
+.progressRow>div:first-child{display:grid;gap:4px}
+.progressRow span{font-size:.72rem;opacity:.52}
+.progressRowValue{text-align:right;display:grid;gap:3px;min-width:95px}
+.progressRowValue strong{font-size:1.1rem}
+.testProgress{margin-top:14px}
+.emptyInline{display:grid;gap:6px;margin-top:15px;padding:15px;border:1px dashed var(--border,rgba(255,255,255,.12));border-radius:13px}
+.emptyInline span{font-size:.78rem;line-height:1.45;opacity:.58}
+.testGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}
+.testGrid>div{padding:13px;border:1px solid var(--border,rgba(255,255,255,.07));border-radius:11px}
+.testGrid span,.testGrid b{display:block}
+.testGrid span{font-size:.7rem;opacity:.52}
+.testGrid b{margin-top:5px;font-size:1.1rem}
+@media(max-width:760px){.progressHeroMain,.progressGrid{grid-template-columns:1fr}.progressHeroNote{max-width:none}.testGrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.progressBars{gap:6px}.progressRow{gap:10px}.progressRowValue{min-width:75px}.testGrid{grid-template-columns:1fr 1fr}}
