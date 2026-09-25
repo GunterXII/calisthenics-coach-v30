@@ -138,3 +138,23 @@ body:has(.workoutTop){background:radial-gradient(ellipse 100% 45% at 50% -8%,#1a
 .testGrid b{margin-top:5px;font-size:1.1rem}
 @media(max-width:760px){.progressHeroMain,.progressGrid{grid-template-columns:1fr}.progressHeroNote{max-width:none}.testGrid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.progressBars{gap:6px}.progressRow{gap:10px}.progressRowValue{min-width:75px}.testGrid{grid-template-columns:1fr 1fr}}
+
+/* Premium History + Session Detail */
+.historyCard{position:relative;text-align:left;transition:transform .18s ease,border-color .18s ease}
+.historyCard:hover{transform:translateY(-1px)}
+.historyOpenHint{display:flex;justify-content:flex-end;gap:7px;margin-top:10px;font-size:.68rem;opacity:.42}
+.historyStatusDone,.historyStatusPartial{font-weight:700;letter-spacing:.06em}
+.historyStatusDone{opacity:.9}.historyStatusPartial{opacity:.58}
+.historyDetailSheet{max-width:760px}
+.detailSection{margin-top:14px;border:1px solid var(--border,rgba(255,255,255,.08));border-radius:15px;overflow:hidden}
+.detailSectionHead{display:flex;justify-content:space-between;padding:13px 15px;border-bottom:1px solid var(--border,rgba(255,255,255,.07))}
+.detailExercise{padding:14px 15px;border-bottom:1px solid var(--border,rgba(255,255,255,.06))}
+.detailExercise:last-child{border-bottom:0}
+.detailExerciseHead{display:flex;justify-content:space-between;gap:16px;align-items:start;margin-bottom:9px}
+.detailExerciseHead>div{display:grid;gap:4px}.detailExerciseHead span{font-size:.7rem;opacity:.5}
+.detailExerciseHead>strong{font-size:1.05rem}
+.detailSet{display:grid;grid-template-columns:70px 1fr auto;gap:10px;align-items:center;padding:8px 0;font-size:.76rem;border-top:1px solid rgba(255,255,255,.045)}
+.detailSet span{opacity:.5}.detailSet b{text-align:center}
+.detailWarning{display:grid;gap:4px;margin:14px 0;padding:13px 15px;border:1px solid rgba(255,255,255,.1);border-radius:13px;background:rgba(255,255,255,.025)}
+.detailWarning span{font-size:.75rem;opacity:.55}
+@media(max-width:560px){.detailSet{grid-template-columns:52px 1fr;gap:6px}.detailSet span:last-child{grid-column:2}.detailSet b{text-align:left}}
