@@ -179,3 +179,26 @@ body:has(.workoutTop){background:radial-gradient(ellipse 100% 45% at 50% -8%,#1a
 .workoutActions{padding-bottom:max(12px,env(safe-area-inset-bottom))}
 .workoutActions button{min-height:42px}
 @media(max-width:560px){.liveRail{margin-bottom:9px}.coachLiveNote{margin-bottom:9px}.workoutTop{top:-1px}.targetBig{font-size:3.6rem}}
+
+/* Adaptive Coach + Premium Progress Signals */
+.adaptiveCoachCard{margin-top:14px;display:grid;gap:12px}
+.adaptiveCoachCard small{font-size:.68rem;opacity:.45}
+.adaptiveMetricRow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.adaptiveMetricRow>div{padding:12px;border:1px solid var(--border,rgba(255,255,255,.07));border-radius:12px}
+.adaptiveMetricRow b,.adaptiveMetricRow span{display:block}
+.adaptiveMetricRow b{font-size:1.05rem;font-variant-numeric:tabular-nums}
+.adaptiveMetricRow span{margin-top:4px;font-size:.67rem;opacity:.48}
+.premiumSignalGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.premiumMiniCard{padding:17px;border:1px solid var(--border,rgba(255,255,255,.08));border-radius:15px;background:rgba(255,255,255,.018)}
+.premiumMiniCard>h3{margin:4px 0 12px}
+.premiumMiniCard>p{margin:0;font-size:.78rem;line-height:1.5;opacity:.56}
+.prList{display:grid}
+.prRow{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-top:1px solid rgba(255,255,255,.055)}
+.prRow:first-child{border-top:0}
+.prRow>div{display:grid;gap:3px}.prRow span{font-size:.67rem;opacity:.45}
+.prRow strong{font-size:1.2rem;font-variant-numeric:tabular-nums}
+.testCompareList{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
+.testCompareList>div{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:8px;padding:10px;border:1px solid rgba(255,255,255,.055);border-radius:10px}
+.testCompareList span{font-size:.7rem;opacity:.55}.testCompareList b{font-size:1rem}.testCompareList em{font-size:.68rem;font-style:normal;opacity:.55}
+@media(max-width:760px){.premiumSignalGrid{grid-template-columns:1fr}}
+@media(max-width:480px){.adaptiveMetricRow{gap:6px}.adaptiveMetricRow>div{padding:10px 8px}.testCompareList{grid-template-columns:1fr}}
