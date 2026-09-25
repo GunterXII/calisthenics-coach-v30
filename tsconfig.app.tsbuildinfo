@@ -1,0 +1,1 @@
+{"root":["./src/main.tsx","./src/vite-env.d.ts","./src/core/progression.ts","./src/core/types.ts","./src/data/program.ts","./src/storage/db.ts"],"errors":true,"version":"5.8.3"}
