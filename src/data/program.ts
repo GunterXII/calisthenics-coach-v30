@@ -55,10 +55,11 @@ for(let w=1;w<=4;w++){
     straight(`w${w}-a4`,'Australian Pull-up','Australian',3,15,15,20,2,90),
     straight(`w${w}-pk`,'Pike Push-up','Pike',3,8,8,12,2,90)
   ];
-  // Friday is the longer endurance circuit; Saturday is the shorter, more competition-specific Bar Set.
-  const fridayRounds=w<3?3:4; const fridayRest=w===1?150:w===2?135:w===3?135:120;
-  const friday=[bar(`w${w}-fri-circuit`,'3 MU + 8 PU + 15 Dips + 20 Push-ups + 10 Knee Raises',fridayRounds,fridayRest,['3 Muscle-up','8 Pull-up','15 Dips','20 Push-up','10 Knee Raises'],'PERFORMANCE_THEN_DENSITY')];
-  const saturdayRounds=w<3?3:4; const saturdayRest=w===1?150:w===2?135:w===3?135:120;
+  // Friday = true continuous endurance circuit: no planned rest between exercises; recover only after each round.
+  const fridayRounds=w<3?3:4; const fridayRest=w===1?120:w===2?105:w===3?90:75;
+  const friday=[circuit(`w${w}-fri-circuit`,'8 Pull-up + 12 Dips + 20 Push-up + 15 Australian',fridayRounds,fridayRest,['8 Pull-up','12 Dips','20 Push-up','15 Australian Pull-up'],'PERFORMANCE_THEN_DENSITY')];
+  // Saturday = specific Bar Set: keep the user's preferred sequence and reserve Muscle-ups for this day.
+  const saturdayRounds=w<3?3:4; const saturdayRest=w===1?150:w===2?135:w===3?120:105;
   const saturday=[bar(`w${w}-bar`,'2 MU + 6 PU + 10 Dips + 15 Push-ups',saturdayRounds,saturdayRest,['2 Muscle-up','6 Pull-up','10 Dips','15 Push-up'])];
   workouts.push(...week(w,blocks.A,45,pull,push,upper,friday,saturday));
 }
@@ -120,12 +121,14 @@ for(let w=10;w<=13;w++){
   ];
   const barRest=w===10?120:w===11?120:w===12?105:90;
   const upper=[bar(`w${w}-bar`,`Bar Set C · 2 MU + 6 PU + 10 Dips + 15 Push-ups`,w===10?4:5,barRest,['2 Muscle-up','6 Pull-up','10 Dips','15 Push-up'])];
-  // Friday becomes the longer endurance circuit; Saturday remains the shorter Bar Set competition format.
+  // Friday = continuous endurance circuit. Saturday = specific Bar Set, never a duplicate circuit.
   const fridayRounds=w===10?4:w===11?4:5;
   const fridayRest=w===10?120:w===11?105:w===12?90:75;
-  const friday=[circuit(`w${w}-fri-circuit`,'10 Pull-up + 15 Dips + 20 Push-up + 15 Australian',fridayRounds,fridayRest,['10 Pull-up','15 Dips','20 Push-up','15 Australian Pull-up'])];
-  const saturdayCircuit=circuit(`w${w}-circuit`,'Circuit 01 · 10 PU + 15 Dips + 20 Push-ups + 15 Australian',4,120,['10 Pull-up','15 Dips','20 Push-up','15 Australian Pull-up'],'PERFORMANCE_THEN_DENSITY');
-  workouts.push(...week(w,blocks.C,45,pull,push,upper,friday,[saturdayCircuit]));
+  const friday=[circuit(`w${w}-fri-circuit`,'10 Pull-up + 15 Dips + 20 Push-up + 15 Australian',fridayRounds,fridayRest,['10 Pull-up','15 Dips','20 Push-up','15 Australian Pull-up'],'PERFORMANCE_THEN_DENSITY')];
+  const saturdayRounds=w===10?4:w===11?4:w===12?5:5;
+  const saturdayRest=w===10?120:w===11?105:w===12?105:90;
+  const saturday=[bar(`w${w}-bar`,`Bar Set C · 2 MU + 6 PU + 10 Dips + 15 Push-ups`,saturdayRounds,saturdayRest,['2 Muscle-up','6 Pull-up','10 Dips','15 Push-up'],'PERFORMANCE_THEN_DENSITY')];
+  workouts.push(...week(w,blocks.C,45,pull,push,upper,friday,saturday));
 }
 
 // BLOCK P — WEEKS 14–16
