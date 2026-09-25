@@ -2,7 +2,7 @@ import React,{useEffect,useMemo,useRef,useState}from'react';
 import{createRoot}from'react-dom/client';
 import{Activity,Check,Download,History,Home,Play,Settings,Timer,TrendingUp,X,RotateCcw}from'lucide-react';
 import'./styles.css';
-import{workouts,getWorkoutForToday,getCurrentWeek,assistedEnduranceTemplates,withAssistance,ASSISTANCE_LEVELS,assistanceLabel}from'./data/program';
+import{workouts,getWorkoutForToday,assistedEnduranceTemplates,withAssistance,ASSISTANCE_LEVELS,assistanceLabel}from'./data/program';
 import{exportData,importData,listDecisions,listSessions,saveDecision,saveSession,seedWorkouts,clearAllData}from'./storage/db';
 import{decide}from'./core/progression';
 import{getCurrentWeek,startProgramCycle}from'./core/cycle';
