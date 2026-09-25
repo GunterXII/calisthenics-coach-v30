@@ -100,7 +100,7 @@ function ProgressView({sessions}:{sessions:Session[]}){
  const totalReps=allPerf.reduce((n,p)=>n+p.actualReps,0)+completed.reduce((n,s)=>n+(s.emom||[]).reduce((a,l)=>a+l.actualReps.reduce((x,y)=>x+y,0),0),0);
  const avgRir=allPerf.length?allPerf.reduce((n,p)=>n+p.rir,0)/allPerf.length:0;
  const q=allPerf.map(p=>p.technique==='EXCELLENT'?3:p.technique==='GOOD'?2:p.technique==='OK'?1:0);
- const quality=q.length?Math.round(q.reduce((a,b)=>a+b,0)/q.length/3*100):0;
+ const quality=q.length?Math.round(q.reduce<number>((a,b)=>a+b,0)/q.length/3*100):0;
  const exerciseMap=new Map<string,{exposures:Set<string>;target:number;actual:number;best:number;quality:number[]}>();
  for(const p of allPerf){const x=exerciseMap.get(p.exercise)||{exposures:new Set<string>(),target:0,actual:0,best:0,quality:[]};x.exposures.add(p.date.slice(0,10));x.target+=p.targetReps;x.actual+=p.actualReps;x.best=Math.max(x.best,p.actualReps);x.quality.push(p.technique==='EXCELLENT'?3:p.technique==='GOOD'?2:p.technique==='OK'?1:0);exerciseMap.set(p.exercise,x)}
  const rows=[...exerciseMap.entries()].map(([name,x])=>({name,...x,completion:x.target?Math.round(x.actual/x.target*100):0,quality:x.quality.length?Math.round(x.quality.reduce((a,b)=>a+b,0)/x.quality.length/3*100):0})).sort((a,b)=>b.actual-a.actual);
