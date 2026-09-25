@@ -200,7 +200,7 @@ export function decide(target:ExerciseTarget, performances:Performance[]):Decisi
       }
       case 'PERFORMANCE_THEN_DENSITY': {
         const minRest=target.minRest??45;
-        if(target.type==='BAR_SET' && target.rest>minRest){
+        if((target.type==='BAR_SET'||target.type==='CIRCUIT') && target.rest>minRest){
           return base(target,'REDUCE_REST',
             'La performance è consolidata. Riduzione del recupero di 15 secondi mantenendo invariati round e sequenza.',
             strongCount>=3?'HIGH':'MEDIUM',
