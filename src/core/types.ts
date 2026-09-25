@@ -1,6 +1,6 @@
 export type Technique='POOR'|'OK'|'GOOD'|'EXCELLENT';
 export type SessionStatus='IN_PROGRESS'|'COMPLETED'|'PARTIAL'|'ABANDONED';
-export type BlockType='STRAIGHT_SET'|'EMOM'|'BAR_SET'|'DENSITY'|'TEST'|'RECOVERY'|'ASSISTED_ENDURANCE';
+export type BlockType='STRAIGHT_SET'|'EMOM'|'BAR_SET'|'DENSITY'|'TEST'|'RECOVERY'|'ASSISTED_ENDURANCE'|'CIRCUIT';
 export type Action='MAINTAIN'|'INCREASE_REPS'|'INCREASE_SETS'|'REDUCE_REST'|'INCREASE_DENSITY'|'INCREASE_DURATION'|'PROGRESS_VARIANT'|'REGRESS_VARIANT'|'REDUCE_ASSISTANCE'|'DELOAD';
 export type Strategy='REPS_THEN_VOLUME'|'REPS_THEN_DURATION'|'ROUNDS_THEN_REST'|'PERFORMANCE_THEN_DENSITY'|'ASSISTANCE_THEN_REPS';
 export interface Performance {date:string; targetReps:number; actualReps:number; rir:number; technique:Technique; completed:boolean; exercise:string; setNumber:number; targetId:string; rest:number; sessionId?:string; blockType?:BlockType; progressionKey?:string; assistanceLevel?:'HEAVY'|'MEDIUM'|'LIGHT'|'MINIMAL'; assistanceRank?:number;}
