@@ -17,7 +17,7 @@ function week(w:number,block:string,duration:number,pull:ExerciseTarget[],push:E
     {id:`w${w}-mon`,name:'Pull Endurance',day:'Monday',block,week:w,duration,targets:pull},
     {id:`w${w}-tue`,name:'Push Endurance',day:'Tuesday',block,week:w,duration,targets:push},
     {id:`w${w}-thu`,name:upper[0]?.type==='DENSITY'?'Upper Density':'Upper Volume / Density',day:'Thursday',block,week:w,duration,targets:upper},
-    {id:`w${w}-fri`,name:'Upper Endurance — Low Fatigue',day:'Friday',block,week:w,duration:30,targets:friday},
+    {id:`w${w}-fri`,name:'Endurance Circuit',day:'Friday',block,week:w,duration:30,targets:friday},
     {id:`w${w}-sat`,name:saturday[0]?.type==='BAR_SET'?'Bar Set':'Circuit',day:'Saturday',block,week:w,duration,targets:saturday,type:saturday[0]?.type},
   ];
 }
@@ -54,15 +54,11 @@ for(let w=1;w<=4;w++){
     straight(`w${w}-a4`,'Australian Pull-up','Australian',3,15,15,20,2,90),
     straight(`w${w}-pk`,'Pike Push-up','Pike',3,8,8,12,2,90)
   ];
-  // Friday is a dedicated endurance-volume day, without core and without supersets.
-  const friday=[
-    straight(`w${w}-fr-pu`,'Pull-up','Strict Pull-up',3,8,8,12,3,90),
-    straight(`w${w}-fr-di`,'Dips','Parallel Bar Dip',3,10,10,16,3,90),
-    straight(`w${w}-fr-ps`,'Push-up','Standard Push-up',3,15,15,22,3,90),
-    straight(`w${w}-fr-au`,'Australian Pull-up','Australian',3,12,12,20,3,90)
-  ];
-  const rounds=w<3?3:4; const rest=w===1?150:w===2?135:w===3?135:120;
-  const saturday=[bar(`w${w}-bar`,'2 MU + 6 PU + 10 Dips + 15 Push-ups',rounds,rest,['2 Muscle-up','6 Pull-up','10 Dips','15 Push-up'])];
+  // Friday is the longer endurance circuit; Saturday is the shorter, more competition-specific Bar Set.
+  const fridayRounds=w<3?3:4; const fridayRest=w===1?150:w===2?135:w===3?135:120;
+  const friday=[bar(`w${w}-fri-circuit`,'3 MU + 8 PU + 15 Dips + 20 Push-ups + 10 Knee Raises',fridayRounds,fridayRest,['3 Muscle-up','8 Pull-up','15 Dips','20 Push-up','10 Knee Raises'],'PERFORMANCE_THEN_DENSITY')];
+  const saturdayRounds=w<3?3:4; const saturdayRest=w===1?150:w===2?135:w===3?135:120;
+  const saturday=[bar(`w${w}-bar`,'2 MU + 6 PU + 10 Dips + 15 Push-ups',saturdayRounds,saturdayRest,['2 Muscle-up','6 Pull-up','10 Dips','15 Push-up'])];
   workouts.push(...week(w,blocks.A,45,pull,push,upper,friday,saturday));
 }
 
